@@ -1,0 +1,289 @@
+/* পুরো বডি থেকে ডানে-বাম we স্ক্রল বন্ধ করার জন্য */
+html, body {
+    max-width: 100%;
+    overflow-x: hidden;
+    position: relative;
+}
+
+/* সব এলিমেন্ট যেন স্ক্রিনের বাইরে না যায় */
+* {
+    box-sizing: border-box;
+}
+.logocontainer {
+  width: 100%; /* পুরো স্ক্রিন জুড়ে জায়গা নিবে */
+}
+
+.navbar {
+  display: flex; /* আইটেমগুলোকে এক লাইনে আনবে */
+  justify-content: space-between; /* হোম, লোগো এবং অ্যাবাউটকে সমান দূরে দূরে সরিয়ে দিবে */
+  align-items: center; /* সবগুলোকে লম্বালম্বিভাবে মাঝখানে রাখবে */
+  padding: 10px 50px; /* ডানে-বামে একটু মার্জিন রাখার জন্য, যাতে একদম স্ক্রিনের সাথে লেগে না থাকে */
+}
+
+.navbar img {
+  max-width: 300px; /* লোগোর সাইজ আপনার প্রয়োজন মতো ঠিক করে নিন */
+  height: auto;
+}
+header {
+  
+   background-color: rgb(249, 250, 250);
+  box-shadow: 0 2px 2px rgba(0, 0, 0, 0.4);
+}
+a.active{
+  background: linear-gradient(45deg, #00c6ff, #0072ff);
+  padding: 8px 15px;
+  border-radius: 5px;
+  color: #fff;
+   transition: 0.3s;
+   text-decoration: none;
+}
+
+
+a:hover{
+    /* background: #14ff72cb;
+    border-radius: 2px; */
+      color: #00c6ff;
+  transform: translateY(-2px);
+}
+.product-details{
+  
+}
+@keyframes continuousShake {
+  0% { transform: translate(0px, 0px) rotate(0deg); }
+  25% { transform: translate(2px, 1px) rotate(1deg); }
+  50% { transform: translate(-1px, -2px) rotate(-1deg); }
+  75% { transform: translate(-3px, 1px) rotate(0deg); }
+  100% { transform: translate(0px, 0px) rotate(0deg); }
+}
+
+/* লোগো ইমেজে অ্যানিমেশন সেট করা */
+.navbar img {
+  display: block;
+  max-width: 150px; /* আপনার প্রয়োজনমতো সাইজ দিন */
+  height: auto;
+  
+  /* অ্যানিমেশন কোড এখানে */
+  animation: continuousShake 0.8s infinite; /* ০.৮ সেকেন্ড পরপর সবসময় কাঁপবে */
+  transition: all 0.3s ease; /* স্মুথ ট্রানজিশনের জন্য */
+}
+ .product-container {
+    width: 90%;
+    max-width: 600px; /* স্লাইডারের চওড়া আপনার পছন্দমতো দিন */
+    margin: 40px auto;
+    text-align: center;
+}
+
+.slider {
+    position: relative;
+    width: 100%;
+    height: 500px; /* ছবির সাইজ যাই হোক, স্লাইডার সবসময় ৫০০ পিক্সেল উঁচু থাকবে */
+    overflow: hidden;
+    border-radius: 15px;
+    background-color: #f4f4f4; /* ছবি লোড হওয়ার আগে হালকা ব্যাকগ্রাউন্ড দেখাবে */
+    box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+}
+
+.slide {
+       position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: contain; /* পুরো ছবি দেখানোর জন্য */
+    opacity: 0; /* শুরুতে সব ছবি লুকানো থাকবে */
+    transition: opacity 3s ease-in-out; /* ছবি বদলানোর সময় মসৃণ হবে */
+    z-index: 1;
+}
+
+.slide.active {
+     
+        opacity: 1 !important; /* জাভাস্ক্রিপ্ট যখন এই ক্লাস দিবে তখন ছবি দেখা যাবে */
+    z-index: 2;
+}
+ .product-details{
+        font-size: 14px;
+        padding: 0 10px;
+        margin-top: 20px;
+    }
+    .product-details a{
+      font-size: large;
+      background-color: red;
+    }
+    
+ 
+
+/* মেইন কন্টেইনার */
+ .img-itemlist {
+  display: grid;
+  /* বড় স্ক্রিনে (Desktop) ৩টি সমান কলাম */
+  grid-template-columns: repeat(3, 1fr); 
+  gap: 15px; /* ইমেজগুলোর মাঝের গ্যাপ */
+  padding: 10px;
+}
+
+/* ইমেজের বাইরের ডিভ */
+.img-itemlist div {
+  width: 100%;
+  height: 250px; /* সব ইমেজ সমান উচ্চতার হবে */
+  overflow: hidden;
+  border-radius: 8px;
+  cursor: pointer;
+ 
+  transition: transform 0.3s ease;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+}
+.img-itemlist div.active-hover {
+  transform: scale(1.25);  
+ 
+  box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+}
+.img-itemlist img {
+  width: 100%;
+  height: 100%;
+  /* ইমেজ কাটবে না, বরং ফ্রেমের ভেতরে ছোট হয়ে পুরোটা দেখাবে */
+  object-fit: contain; 
+  
+  background-color: #f4f4f4; 
+}
+
+
+/* ইমেজের বাইরের ডিভ */
+ 
+
+/* ইমেজের একচুয়াল স্টাইল */
+ 
+
+/* মাউস নিলে হালকা বড় হবে */
+.img-itemlist div:hover {
+  transform: scale(1.05);
+}
+ .container-border{
+  max-width: 100%;
+  height: 350px;
+  background-color: antiquewhite;
+  border-radius: 25px;
+ }
+/* মোবাইলের জন্য ছবি ছোট করা */
+@media (max-width: 600px) {
+    .slider {
+        height: 350px;
+    }
+ 
+}
+@media (max-width: 768px) {
+  .img-itemlist {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+/* মোবাইল স্ক্রিনের জন্য (৪৮০px এর নিচে) ১টি কলাম */
+@media (max-width: 480px) {
+  .img-itemlist {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+  }
+  
+  .img-itemlist div {
+    height: 300px;  
+     width: 100%;
+  height: 100%;
+ 
+  object-fit: contain; 
+  
+  background-color: #f4f4f4; 
+    transition: transform 0.5s ease, border 0.3s ease;
+  border: 2px solid transparent;
+  }
+.img-itemlist div.active-hover {
+  transform: scale(1.05); /* ইমেজ কিছুটা বড় হবে */
+  border: 2px solid #007bff; /* আপনি চাইলে বর্ডার দিতে পারেন */
+  box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+}
+}
+@media (max-width: 768px) {
+  .navbar {
+    flex-direction: column; /* আইটেমগুলোকে লম্বালম্বিভাবে একটার নিচে একটা সাজাবে */
+    gap: 15px; /* আইটেমগুলোর মাঝখানে একটু ফাঁকা জায়গা তৈরি করবে */
+    text-align: center;
+  }
+
+  .navbar img {
+    order: -1; /* লোগোটিকে সবার উপরে দেখানোর জন্য */
+    max-width: 120px; /* মোবাইলে লোগো কিছুটা ছোট করার জন্য */
+  }
+}
+@media (max-width: 768px) {
+    /* নেভবারকে উপর-নিচে এবং মাঝখানে আনা */
+      .navbar {
+    flex-direction: row; /* এক লাইনে রাখার জন্য */
+    justify-content: space-between; /* দুই প্রান্তে সরিয়ে দিবে */
+       padding: 10px 15px; /* সাইডের ফাঁকা জায়গা কমিয়ে আনা */
+    gap: 5px; /* আইটেমগুলোর মাঝখানে সামান্য গ্যাপ */
+  }
+
+  /* মোবাইলে বাটনগুলো ছোট এবং সুন্দর দেখানোর জন্য */
+  .navbar a.active {
+    padding: 6px 10px; /* বাটনের ভেতরের জায়গা কমানো */
+    font-size: 12px; /* লেখার সাইজ ছোট করা */
+    white-space: nowrap; /* লেখা যেন ভেঙে নিচে না যায় */
+  }
+
+  .navbar img {
+    max-width: 90px; /* লোগো ছোট করা যাতে বাটনগুলো জায়গা পায় */
+    order: 0; /* লোগো মাঝখানেই থাকবে */
+  }
+}
+    /* মেইন কন্টেইনার এবং স্লাইডার অ্যাডজাস্টমেন্ট */
+    .product-container {
+        width: 95%; /* মোবাইলে স্ক্রিনের দুই পাশে খুব সামান্য ফাঁকা থাকবে */
+        margin: 20px auto;
+    }
+
+    /* .slider {
+        height: 350px; /* মোবাইলে স্লাইডারের উচ্চতা কমিয়ে আনা হলো */
+        /* border-radius: 10px;} */
+     */
+.slider {
+    position: relative;
+    width: 100%;
+    height: 500px;
+    overflow: hidden; /* জুম হওয়ার সময় ছবি যেন বাইরে না যায় */
+     cursor: zoom-in !important;  /* মাউস নিলে জুম আইকন দেখাবে */
+}
+
+.slide {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    opacity: 0;
+    transition: opacity 1s ease, transform 0.5s ease; /* জুম ট্রানজিশন যোগ করা হয়েছে */
+}
+
+/* মাউস নিলে জুম হবে */
+.slider:hover .slide.active {
+    transform: scale(1.2); /* ১.২ গুণ বড় হবে, আপনি চাইলে ১.৫ দিতে পারেন */
+}
+    .product-details h2 {
+        font-size: 20px; /* হেডিং কিছুটা ছোট করা */
+        margin-top: 15px;
+    }
+    .product-details a {
+        font-size: 20px; /* হেডিং কিছুটা ছোট করা */
+        margin-top: 15px;
+    }
+    .product-details p {
+        font-size: 14px;
+        padding: 0 10px;
+       
+    }
+
+ 
+
+
+/* ছোট মোবাইলের জন্য (যেমন iPhone SE) */
+@media (max-width: 480px) {
+    .slider {
+        height: 280px; /* আরও ছোট স্ক্রিনে উচ্চতা আরও কমানো */
+    }
+}
